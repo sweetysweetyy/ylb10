@@ -2,10 +2,10 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 
-import { statusLabel } from "./dashboard";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { statusLabel } from "./index";
+import { Badge } from "@/etudedemarche/components/ui/badge";
+import { Button } from "@/etudedemarche/components/ui/button";
+import { Card } from "@/etudedemarche/components/ui/card";
 import { useStudies } from "@/etudedemarche/lib/queries";
 
 export const Route = createFileRoute("/_authenticated/etudedemarche/studies/")({

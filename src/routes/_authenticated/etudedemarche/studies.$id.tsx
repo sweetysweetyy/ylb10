@@ -5,11 +5,11 @@ import { ArrowLeft, Download, RefreshCw, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { statusLabel } from "./dashboard";
+import { statusLabel } from "./index";
 import { WaitingExperience } from "@/etudedemarche/components/WaitingExperience";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Badge } from "@/etudedemarche/components/ui/badge";
+import { Button } from "@/etudedemarche/components/ui/button";
+import { Card } from "@/etudedemarche/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/etudedemarche/hooks/useAuth";
 import { exportStudyPdf } from "@/etudedemarche/lib/pdf";

@@ -2,9 +2,9 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { ArrowUpRight, BookOpenCheck, Clock, FileBarChart, Sparkles, Target } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Badge } from "@/etudedemarche/components/ui/badge";
+import { Button } from "@/etudedemarche/components/ui/button";
+import { Card } from "@/etudedemarche/components/ui/card";
 import { useAuth } from "@/etudedemarche/hooks/useAuth";
 import { useMethodologies, useStudies } from "@/etudedemarche/lib/queries";
 import { AI_MODELS } from "@/etudedemarche/lib/study-types";

@@ -1,8 +1,8 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
 
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import { Badge } from "@/etudedemarche/components/ui/badge";
+import { Card } from "@/etudedemarche/components/ui/card";
 import type { StudyLog } from "@/etudedemarche/lib/study-types";
 
 const TIPS = [

@@ -5,9 +5,9 @@ import { BookOpenCheck, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Badge } from "@/etudedemarche/components/ui/badge";
+import { Button } from "@/etudedemarche/components/ui/button";
+import { Card } from "@/etudedemarche/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {

@@ -6,9 +6,9 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { WaitingExperience } from "@/etudedemarche/components/WaitingExperience";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Badge } from "@/etudedemarche/components/ui/badge";
+import { Button } from "@/etudedemarche/components/ui/button";
+import { Card } from "@/etudedemarche/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/etudedemarche/hooks/useAuth";
 import { useSettings } from "@/etudedemarche/lib/queries";
