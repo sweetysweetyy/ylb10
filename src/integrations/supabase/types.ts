@@ -1528,6 +1528,117 @@ export type Database = {
         }
         Relationships: []
       }
+      edm_methodologies: {
+        Row: {
+          category: string
+          content: string
+          created_at: string
+          id: string
+          is_active: boolean
+          priority: number
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string
+          content: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          priority?: number
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          content?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          priority?: number
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      edm_settings: {
+        Row: {
+          created_at: string
+          depth: string
+          language: string
+          model: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          depth?: string
+          language?: string
+          model?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          depth?: string
+          language?: string
+          model?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      edm_studies: {
+        Row: {
+          analysis: Json | null
+          brief: string
+          created_at: string
+          error: string | null
+          id: string
+          logs: Json
+          model: string
+          progress: number
+          report: Json | null
+          status: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          analysis?: Json | null
+          brief: string
+          created_at?: string
+          error?: string | null
+          id?: string
+          logs?: Json
+          model?: string
+          progress?: number
+          report?: Json | null
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          analysis?: Json | null
+          brief?: string
+          created_at?: string
+          error?: string | null
+          id?: string
+          logs?: Json
+          model?: string
+          progress?: number
+          report?: Json | null
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       fl_activity_log: {
         Row: {
           created_at: string
