@@ -23,6 +23,7 @@ import { Route as AuthenticatedCmlRouteRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedCrmRouteRouteImport } from './routes/_authenticated/crm/route'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDyapRouteRouteImport } from './routes/_authenticated/dyap/route'
+import { Route as AuthenticatedEtudedemarcheRouteRouteImport } from './routes/_authenticated/etudedemarche/route'
 import { Route as AuthenticatedFeelooRouteRouteImport } from './routes/_authenticated/feeloo/route'
 import { Route as AuthenticatedHistoryRouteImport } from './routes/_authenticated/history'
 import { Route as AuthenticatedIdeasRouteImport } from './routes/_authenticated/ideas'
@@ -89,6 +90,9 @@ import { Route as AuthenticatedDyapDashboardRouteImport } from './routes/_authen
 import { Route as AuthenticatedDyapMediatechRouteImport } from './routes/_authenticated/dyap/mediatech'
 import { Route as AuthenticatedDyapSettingsRouteImport } from './routes/_authenticated/dyap/settings'
 import { Route as AuthenticatedDyapUpdateRouteImport } from './routes/_authenticated/dyap/update'
+import { Route as AuthenticatedEtudedemarcheIndexRouteImport } from './routes/_authenticated/etudedemarche/index'
+import { Route as AuthenticatedEtudedemarcheMethodologiesRouteImport } from './routes/_authenticated/etudedemarche/methodologies'
+import { Route as AuthenticatedEtudedemarcheSettingsRouteImport } from './routes/_authenticated/etudedemarche/settings'
 import { Route as AuthenticatedFeelooIndexRouteImport } from './routes/_authenticated/feeloo/index'
 import { Route as AuthenticatedFeelooAnalyticsRouteImport } from './routes/_authenticated/feeloo/analytics'
 import { Route as AuthenticatedFeelooAutomationRouteImport } from './routes/_authenticated/feeloo/automation'
@@ -179,6 +183,9 @@ import { Route as AuthenticatedBusinessplanImpressionIdRouteImport } from './rou
 import { Route as AuthenticatedBusinessplanPlanIdRouteImport } from './routes/_authenticated/businessplan/plan.$id'
 import { Route as AuthenticatedCrmOpportunitiesIndexRouteImport } from './routes/_authenticated/crm/opportunities/index'
 import { Route as AuthenticatedCrmOpportunitiesIdRouteImport } from './routes/_authenticated/crm/opportunities/$id'
+import { Route as AuthenticatedEtudedemarcheStudiesIndexRouteImport } from './routes/_authenticated/etudedemarche/studies.index'
+import { Route as AuthenticatedEtudedemarcheStudiesIdRouteImport } from './routes/_authenticated/etudedemarche/studies.$id'
+import { Route as AuthenticatedEtudedemarcheStudiesNewRouteImport } from './routes/_authenticated/etudedemarche/studies.new'
 import { Route as AuthenticatedFeelooCandidatesIndexRouteImport } from './routes/_authenticated/feeloo/candidates/index'
 import { Route as AuthenticatedFeelooCandidatesIdRouteImport } from './routes/_authenticated/feeloo/candidates/$id'
 import { Route as AuthenticatedFeelooJobsIndexRouteImport } from './routes/_authenticated/feeloo/jobs/index'
@@ -287,6 +294,12 @@ const AuthenticatedDyapRouteRoute = AuthenticatedDyapRouteRouteImport.update({
   path: '/dyap',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedEtudedemarcheRouteRoute =
+  AuthenticatedEtudedemarcheRouteRouteImport.update({
+    id: '/etudedemarche',
+    path: '/etudedemarche',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedFeelooRouteRoute =
   AuthenticatedFeelooRouteRouteImport.update({
     id: '/feeloo',
@@ -645,6 +658,24 @@ const AuthenticatedDyapUpdateRoute = AuthenticatedDyapUpdateRouteImport.update({
   path: '/update',
   getParentRoute: () => AuthenticatedDyapRouteRoute,
 } as any)
+const AuthenticatedEtudedemarcheIndexRoute =
+  AuthenticatedEtudedemarcheIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedEtudedemarcheRouteRoute,
+  } as any)
+const AuthenticatedEtudedemarcheMethodologiesRoute =
+  AuthenticatedEtudedemarcheMethodologiesRouteImport.update({
+    id: '/methodologies',
+    path: '/methodologies',
+    getParentRoute: () => AuthenticatedEtudedemarcheRouteRoute,
+  } as any)
+const AuthenticatedEtudedemarcheSettingsRoute =
+  AuthenticatedEtudedemarcheSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedEtudedemarcheRouteRoute,
+  } as any)
 const AuthenticatedFeelooIndexRoute =
   AuthenticatedFeelooIndexRouteImport.update({
     id: '/',
@@ -1164,6 +1195,24 @@ const AuthenticatedCrmOpportunitiesIdRoute =
     path: '/opportunities/$id',
     getParentRoute: () => AuthenticatedCrmRouteRoute,
   } as any)
+const AuthenticatedEtudedemarcheStudiesIndexRoute =
+  AuthenticatedEtudedemarcheStudiesIndexRouteImport.update({
+    id: '/studies/',
+    path: '/studies/',
+    getParentRoute: () => AuthenticatedEtudedemarcheRouteRoute,
+  } as any)
+const AuthenticatedEtudedemarcheStudiesIdRoute =
+  AuthenticatedEtudedemarcheStudiesIdRouteImport.update({
+    id: '/studies/$id',
+    path: '/studies/$id',
+    getParentRoute: () => AuthenticatedEtudedemarcheRouteRoute,
+  } as any)
+const AuthenticatedEtudedemarcheStudiesNewRoute =
+  AuthenticatedEtudedemarcheStudiesNewRouteImport.update({
+    id: '/studies/new',
+    path: '/studies/new',
+    getParentRoute: () => AuthenticatedEtudedemarcheRouteRoute,
+  } as any)
 const AuthenticatedFeelooCandidatesIndexRoute =
   AuthenticatedFeelooCandidatesIndexRouteImport.update({
     id: '/candidates/',
@@ -1398,6 +1447,7 @@ export interface FileRoutesByFullPath {
   '/cml': typeof AuthenticatedCmlRouteRouteWithChildren
   '/crm': typeof AuthenticatedCrmRouteRouteWithChildren
   '/dyap': typeof AuthenticatedDyapRouteRouteWithChildren
+  '/etudedemarche': typeof AuthenticatedEtudedemarcheRouteRouteWithChildren
   '/feeloo': typeof AuthenticatedFeelooRouteRouteWithChildren
   '/nexusjob': typeof AuthenticatedNexusjobRouteRouteWithChildren
   '/noject': typeof AuthenticatedNojectRouteRouteWithChildren
@@ -1461,6 +1511,8 @@ export interface FileRoutesByFullPath {
   '/dyap/mediatech': typeof AuthenticatedDyapMediatechRoute
   '/dyap/settings': typeof AuthenticatedDyapSettingsRoute
   '/dyap/update': typeof AuthenticatedDyapUpdateRoute
+  '/etudedemarche/methodologies': typeof AuthenticatedEtudedemarcheMethodologiesRoute
+  '/etudedemarche/settings': typeof AuthenticatedEtudedemarcheSettingsRoute
   '/feeloo/analytics': typeof AuthenticatedFeelooAnalyticsRoute
   '/feeloo/automation': typeof AuthenticatedFeelooAutomationRoute
   '/feeloo/integrations': typeof AuthenticatedFeelooIntegrationsRoute
@@ -1539,6 +1591,7 @@ export interface FileRoutesByFullPath {
   '/cml/': typeof AuthenticatedCmlIndexRoute
   '/crm/': typeof AuthenticatedCrmIndexRoute
   '/dyap/': typeof AuthenticatedDyapIndexRoute
+  '/etudedemarche/': typeof AuthenticatedEtudedemarcheIndexRoute
   '/feeloo/': typeof AuthenticatedFeelooIndexRoute
   '/mm/': typeof AuthenticatedMmIndexRoute
   '/nexusjob/': typeof AuthenticatedNexusjobIndexRoute
@@ -1555,6 +1608,8 @@ export interface FileRoutesByFullPath {
   '/businessplan/impression/$id': typeof AuthenticatedBusinessplanImpressionIdRoute
   '/businessplan/plan/$id': typeof AuthenticatedBusinessplanPlanIdRoute
   '/crm/opportunities/$id': typeof AuthenticatedCrmOpportunitiesIdRoute
+  '/etudedemarche/studies/$id': typeof AuthenticatedEtudedemarcheStudiesIdRoute
+  '/etudedemarche/studies/new': typeof AuthenticatedEtudedemarcheStudiesNewRoute
   '/feeloo/candidates/$id': typeof AuthenticatedFeelooCandidatesIdRoute
   '/feeloo/jobs/$id': typeof AuthenticatedFeelooJobsIdRoute
   '/mm/automations/$id': typeof AuthenticatedMmAutomationsIdRoute
@@ -1585,6 +1640,7 @@ export interface FileRoutesByFullPath {
   '/tep/contenu/marque': typeof TepTepauthContenuMarqueRoute
   '/tep/planification/jour/$date': typeof TepPlanificationJourDateRoute
   '/crm/opportunities/': typeof AuthenticatedCrmOpportunitiesIndexRoute
+  '/etudedemarche/studies/': typeof AuthenticatedEtudedemarcheStudiesIndexRoute
   '/feeloo/candidates/': typeof AuthenticatedFeelooCandidatesIndexRoute
   '/feeloo/jobs/': typeof AuthenticatedFeelooJobsIndexRoute
   '/mm/automations/': typeof AuthenticatedMmAutomationsIndexRoute
@@ -1653,6 +1709,8 @@ export interface FileRoutesByTo {
   '/dyap/mediatech': typeof AuthenticatedDyapMediatechRoute
   '/dyap/settings': typeof AuthenticatedDyapSettingsRoute
   '/dyap/update': typeof AuthenticatedDyapUpdateRoute
+  '/etudedemarche/methodologies': typeof AuthenticatedEtudedemarcheMethodologiesRoute
+  '/etudedemarche/settings': typeof AuthenticatedEtudedemarcheSettingsRoute
   '/feeloo/analytics': typeof AuthenticatedFeelooAnalyticsRoute
   '/feeloo/automation': typeof AuthenticatedFeelooAutomationRoute
   '/feeloo/integrations': typeof AuthenticatedFeelooIntegrationsRoute
@@ -1730,6 +1788,7 @@ export interface FileRoutesByTo {
   '/cml': typeof AuthenticatedCmlIndexRoute
   '/crm': typeof AuthenticatedCrmIndexRoute
   '/dyap': typeof AuthenticatedDyapIndexRoute
+  '/etudedemarche': typeof AuthenticatedEtudedemarcheIndexRoute
   '/feeloo': typeof AuthenticatedFeelooIndexRoute
   '/mm': typeof AuthenticatedMmIndexRoute
   '/nexusjob': typeof AuthenticatedNexusjobIndexRoute
@@ -1746,6 +1805,8 @@ export interface FileRoutesByTo {
   '/businessplan/impression/$id': typeof AuthenticatedBusinessplanImpressionIdRoute
   '/businessplan/plan/$id': typeof AuthenticatedBusinessplanPlanIdRoute
   '/crm/opportunities/$id': typeof AuthenticatedCrmOpportunitiesIdRoute
+  '/etudedemarche/studies/$id': typeof AuthenticatedEtudedemarcheStudiesIdRoute
+  '/etudedemarche/studies/new': typeof AuthenticatedEtudedemarcheStudiesNewRoute
   '/feeloo/candidates/$id': typeof AuthenticatedFeelooCandidatesIdRoute
   '/feeloo/jobs/$id': typeof AuthenticatedFeelooJobsIdRoute
   '/mm/automations/$id': typeof AuthenticatedMmAutomationsIdRoute
@@ -1776,6 +1837,7 @@ export interface FileRoutesByTo {
   '/tep/contenu/marque': typeof TepTepauthContenuMarqueRoute
   '/tep/planification/jour/$date': typeof TepPlanificationJourDateRoute
   '/crm/opportunities': typeof AuthenticatedCrmOpportunitiesIndexRoute
+  '/etudedemarche/studies': typeof AuthenticatedEtudedemarcheStudiesIndexRoute
   '/feeloo/candidates': typeof AuthenticatedFeelooCandidatesIndexRoute
   '/feeloo/jobs': typeof AuthenticatedFeelooJobsIndexRoute
   '/mm/automations': typeof AuthenticatedMmAutomationsIndexRoute
@@ -1798,6 +1860,7 @@ export interface FileRoutesById {
   '/_authenticated/cml': typeof AuthenticatedCmlRouteRouteWithChildren
   '/_authenticated/crm': typeof AuthenticatedCrmRouteRouteWithChildren
   '/_authenticated/dyap': typeof AuthenticatedDyapRouteRouteWithChildren
+  '/_authenticated/etudedemarche': typeof AuthenticatedEtudedemarcheRouteRouteWithChildren
   '/_authenticated/feeloo': typeof AuthenticatedFeelooRouteRouteWithChildren
   '/_authenticated/nexusjob': typeof AuthenticatedNexusjobRouteRouteWithChildren
   '/_authenticated/noject': typeof AuthenticatedNojectRouteRouteWithChildren
@@ -1863,6 +1926,8 @@ export interface FileRoutesById {
   '/_authenticated/dyap/mediatech': typeof AuthenticatedDyapMediatechRoute
   '/_authenticated/dyap/settings': typeof AuthenticatedDyapSettingsRoute
   '/_authenticated/dyap/update': typeof AuthenticatedDyapUpdateRoute
+  '/_authenticated/etudedemarche/methodologies': typeof AuthenticatedEtudedemarcheMethodologiesRoute
+  '/_authenticated/etudedemarche/settings': typeof AuthenticatedEtudedemarcheSettingsRoute
   '/_authenticated/feeloo/analytics': typeof AuthenticatedFeelooAnalyticsRoute
   '/_authenticated/feeloo/automation': typeof AuthenticatedFeelooAutomationRoute
   '/_authenticated/feeloo/integrations': typeof AuthenticatedFeelooIntegrationsRoute
@@ -1941,6 +2006,7 @@ export interface FileRoutesById {
   '/_authenticated/cml/': typeof AuthenticatedCmlIndexRoute
   '/_authenticated/crm/': typeof AuthenticatedCrmIndexRoute
   '/_authenticated/dyap/': typeof AuthenticatedDyapIndexRoute
+  '/_authenticated/etudedemarche/': typeof AuthenticatedEtudedemarcheIndexRoute
   '/_authenticated/feeloo/': typeof AuthenticatedFeelooIndexRoute
   '/_authenticated/mm/': typeof AuthenticatedMmIndexRoute
   '/_authenticated/nexusjob/': typeof AuthenticatedNexusjobIndexRoute
@@ -1957,6 +2023,8 @@ export interface FileRoutesById {
   '/_authenticated/businessplan/impression/$id': typeof AuthenticatedBusinessplanImpressionIdRoute
   '/_authenticated/businessplan/plan/$id': typeof AuthenticatedBusinessplanPlanIdRoute
   '/_authenticated/crm/opportunities/$id': typeof AuthenticatedCrmOpportunitiesIdRoute
+  '/_authenticated/etudedemarche/studies/$id': typeof AuthenticatedEtudedemarcheStudiesIdRoute
+  '/_authenticated/etudedemarche/studies/new': typeof AuthenticatedEtudedemarcheStudiesNewRoute
   '/_authenticated/feeloo/candidates/$id': typeof AuthenticatedFeelooCandidatesIdRoute
   '/_authenticated/feeloo/jobs/$id': typeof AuthenticatedFeelooJobsIdRoute
   '/_authenticated/mm/automations/$id': typeof AuthenticatedMmAutomationsIdRoute
@@ -1987,6 +2055,7 @@ export interface FileRoutesById {
   '/tep/_tepauth/contenu/marque': typeof TepTepauthContenuMarqueRoute
   '/tep/planification/jour/$date': typeof TepPlanificationJourDateRoute
   '/_authenticated/crm/opportunities/': typeof AuthenticatedCrmOpportunitiesIndexRoute
+  '/_authenticated/etudedemarche/studies/': typeof AuthenticatedEtudedemarcheStudiesIndexRoute
   '/_authenticated/feeloo/candidates/': typeof AuthenticatedFeelooCandidatesIndexRoute
   '/_authenticated/feeloo/jobs/': typeof AuthenticatedFeelooJobsIndexRoute
   '/_authenticated/mm/automations/': typeof AuthenticatedMmAutomationsIndexRoute
@@ -2009,6 +2078,7 @@ export interface FileRouteTypes {
     | '/cml'
     | '/crm'
     | '/dyap'
+    | '/etudedemarche'
     | '/feeloo'
     | '/nexusjob'
     | '/noject'
@@ -2072,6 +2142,8 @@ export interface FileRouteTypes {
     | '/dyap/mediatech'
     | '/dyap/settings'
     | '/dyap/update'
+    | '/etudedemarche/methodologies'
+    | '/etudedemarche/settings'
     | '/feeloo/analytics'
     | '/feeloo/automation'
     | '/feeloo/integrations'
@@ -2150,6 +2222,7 @@ export interface FileRouteTypes {
     | '/cml/'
     | '/crm/'
     | '/dyap/'
+    | '/etudedemarche/'
     | '/feeloo/'
     | '/mm/'
     | '/nexusjob/'
@@ -2166,6 +2239,8 @@ export interface FileRouteTypes {
     | '/businessplan/impression/$id'
     | '/businessplan/plan/$id'
     | '/crm/opportunities/$id'
+    | '/etudedemarche/studies/$id'
+    | '/etudedemarche/studies/new'
     | '/feeloo/candidates/$id'
     | '/feeloo/jobs/$id'
     | '/mm/automations/$id'
@@ -2196,6 +2271,7 @@ export interface FileRouteTypes {
     | '/tep/contenu/marque'
     | '/tep/planification/jour/$date'
     | '/crm/opportunities/'
+    | '/etudedemarche/studies/'
     | '/feeloo/candidates/'
     | '/feeloo/jobs/'
     | '/mm/automations/'
@@ -2264,6 +2340,8 @@ export interface FileRouteTypes {
     | '/dyap/mediatech'
     | '/dyap/settings'
     | '/dyap/update'
+    | '/etudedemarche/methodologies'
+    | '/etudedemarche/settings'
     | '/feeloo/analytics'
     | '/feeloo/automation'
     | '/feeloo/integrations'
@@ -2341,6 +2419,7 @@ export interface FileRouteTypes {
     | '/cml'
     | '/crm'
     | '/dyap'
+    | '/etudedemarche'
     | '/feeloo'
     | '/mm'
     | '/nexusjob'
@@ -2357,6 +2436,8 @@ export interface FileRouteTypes {
     | '/businessplan/impression/$id'
     | '/businessplan/plan/$id'
     | '/crm/opportunities/$id'
+    | '/etudedemarche/studies/$id'
+    | '/etudedemarche/studies/new'
     | '/feeloo/candidates/$id'
     | '/feeloo/jobs/$id'
     | '/mm/automations/$id'
@@ -2387,6 +2468,7 @@ export interface FileRouteTypes {
     | '/tep/contenu/marque'
     | '/tep/planification/jour/$date'
     | '/crm/opportunities'
+    | '/etudedemarche/studies'
     | '/feeloo/candidates'
     | '/feeloo/jobs'
     | '/mm/automations'
@@ -2408,6 +2490,7 @@ export interface FileRouteTypes {
     | '/_authenticated/cml'
     | '/_authenticated/crm'
     | '/_authenticated/dyap'
+    | '/_authenticated/etudedemarche'
     | '/_authenticated/feeloo'
     | '/_authenticated/nexusjob'
     | '/_authenticated/noject'
@@ -2473,6 +2556,8 @@ export interface FileRouteTypes {
     | '/_authenticated/dyap/mediatech'
     | '/_authenticated/dyap/settings'
     | '/_authenticated/dyap/update'
+    | '/_authenticated/etudedemarche/methodologies'
+    | '/_authenticated/etudedemarche/settings'
     | '/_authenticated/feeloo/analytics'
     | '/_authenticated/feeloo/automation'
     | '/_authenticated/feeloo/integrations'
@@ -2551,6 +2636,7 @@ export interface FileRouteTypes {
     | '/_authenticated/cml/'
     | '/_authenticated/crm/'
     | '/_authenticated/dyap/'
+    | '/_authenticated/etudedemarche/'
     | '/_authenticated/feeloo/'
     | '/_authenticated/mm/'
     | '/_authenticated/nexusjob/'
@@ -2567,6 +2653,8 @@ export interface FileRouteTypes {
     | '/_authenticated/businessplan/impression/$id'
     | '/_authenticated/businessplan/plan/$id'
     | '/_authenticated/crm/opportunities/$id'
+    | '/_authenticated/etudedemarche/studies/$id'
+    | '/_authenticated/etudedemarche/studies/new'
     | '/_authenticated/feeloo/candidates/$id'
     | '/_authenticated/feeloo/jobs/$id'
     | '/_authenticated/mm/automations/$id'
@@ -2597,6 +2685,7 @@ export interface FileRouteTypes {
     | '/tep/_tepauth/contenu/marque'
     | '/tep/planification/jour/$date'
     | '/_authenticated/crm/opportunities/'
+    | '/_authenticated/etudedemarche/studies/'
     | '/_authenticated/feeloo/candidates/'
     | '/_authenticated/feeloo/jobs/'
     | '/_authenticated/mm/automations/'
@@ -2746,6 +2835,13 @@ declare module '@tanstack/react-router' {
       path: '/dyap'
       fullPath: '/dyap'
       preLoaderRoute: typeof AuthenticatedDyapRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/etudedemarche': {
+      id: '/_authenticated/etudedemarche'
+      path: '/etudedemarche'
+      fullPath: '/etudedemarche'
+      preLoaderRoute: typeof AuthenticatedEtudedemarcheRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/feeloo': {
@@ -3209,6 +3305,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/dyap/update'
       preLoaderRoute: typeof AuthenticatedDyapUpdateRouteImport
       parentRoute: typeof AuthenticatedDyapRouteRoute
+    }
+    '/_authenticated/etudedemarche/': {
+      id: '/_authenticated/etudedemarche/'
+      path: '/'
+      fullPath: '/etudedemarche/'
+      preLoaderRoute: typeof AuthenticatedEtudedemarcheIndexRouteImport
+      parentRoute: typeof AuthenticatedEtudedemarcheRouteRoute
+    }
+    '/_authenticated/etudedemarche/methodologies': {
+      id: '/_authenticated/etudedemarche/methodologies'
+      path: '/methodologies'
+      fullPath: '/etudedemarche/methodologies'
+      preLoaderRoute: typeof AuthenticatedEtudedemarcheMethodologiesRouteImport
+      parentRoute: typeof AuthenticatedEtudedemarcheRouteRoute
+    }
+    '/_authenticated/etudedemarche/settings': {
+      id: '/_authenticated/etudedemarche/settings'
+      path: '/settings'
+      fullPath: '/etudedemarche/settings'
+      preLoaderRoute: typeof AuthenticatedEtudedemarcheSettingsRouteImport
+      parentRoute: typeof AuthenticatedEtudedemarcheRouteRoute
     }
     '/_authenticated/feeloo/': {
       id: '/_authenticated/feeloo/'
@@ -3840,6 +3957,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCrmOpportunitiesIdRouteImport
       parentRoute: typeof AuthenticatedCrmRouteRoute
     }
+    '/_authenticated/etudedemarche/studies/': {
+      id: '/_authenticated/etudedemarche/studies/'
+      path: '/studies'
+      fullPath: '/etudedemarche/studies/'
+      preLoaderRoute: typeof AuthenticatedEtudedemarcheStudiesIndexRouteImport
+      parentRoute: typeof AuthenticatedEtudedemarcheRouteRoute
+    }
+    '/_authenticated/etudedemarche/studies/$id': {
+      id: '/_authenticated/etudedemarche/studies/$id'
+      path: '/studies/$id'
+      fullPath: '/etudedemarche/studies/$id'
+      preLoaderRoute: typeof AuthenticatedEtudedemarcheStudiesIdRouteImport
+      parentRoute: typeof AuthenticatedEtudedemarcheRouteRoute
+    }
+    '/_authenticated/etudedemarche/studies/new': {
+      id: '/_authenticated/etudedemarche/studies/new'
+      path: '/studies/new'
+      fullPath: '/etudedemarche/studies/new'
+      preLoaderRoute: typeof AuthenticatedEtudedemarcheStudiesNewRouteImport
+      parentRoute: typeof AuthenticatedEtudedemarcheRouteRoute
+    }
     '/_authenticated/feeloo/candidates/': {
       id: '/_authenticated/feeloo/candidates/'
       path: '/candidates'
@@ -4224,6 +4362,35 @@ const AuthenticatedDyapRouteRouteWithChildren =
     AuthenticatedDyapRouteRouteChildren,
   )
 
+interface AuthenticatedEtudedemarcheRouteRouteChildren {
+  AuthenticatedEtudedemarcheMethodologiesRoute: typeof AuthenticatedEtudedemarcheMethodologiesRoute
+  AuthenticatedEtudedemarcheSettingsRoute: typeof AuthenticatedEtudedemarcheSettingsRoute
+  AuthenticatedEtudedemarcheIndexRoute: typeof AuthenticatedEtudedemarcheIndexRoute
+  AuthenticatedEtudedemarcheStudiesIdRoute: typeof AuthenticatedEtudedemarcheStudiesIdRoute
+  AuthenticatedEtudedemarcheStudiesNewRoute: typeof AuthenticatedEtudedemarcheStudiesNewRoute
+  AuthenticatedEtudedemarcheStudiesIndexRoute: typeof AuthenticatedEtudedemarcheStudiesIndexRoute
+}
+
+const AuthenticatedEtudedemarcheRouteRouteChildren: AuthenticatedEtudedemarcheRouteRouteChildren =
+  {
+    AuthenticatedEtudedemarcheMethodologiesRoute:
+      AuthenticatedEtudedemarcheMethodologiesRoute,
+    AuthenticatedEtudedemarcheSettingsRoute:
+      AuthenticatedEtudedemarcheSettingsRoute,
+    AuthenticatedEtudedemarcheIndexRoute: AuthenticatedEtudedemarcheIndexRoute,
+    AuthenticatedEtudedemarcheStudiesIdRoute:
+      AuthenticatedEtudedemarcheStudiesIdRoute,
+    AuthenticatedEtudedemarcheStudiesNewRoute:
+      AuthenticatedEtudedemarcheStudiesNewRoute,
+    AuthenticatedEtudedemarcheStudiesIndexRoute:
+      AuthenticatedEtudedemarcheStudiesIndexRoute,
+  }
+
+const AuthenticatedEtudedemarcheRouteRouteWithChildren =
+  AuthenticatedEtudedemarcheRouteRoute._addFileChildren(
+    AuthenticatedEtudedemarcheRouteRouteChildren,
+  )
+
 interface AuthenticatedFeelooRouteRouteChildren {
   AuthenticatedFeelooAnalyticsRoute: typeof AuthenticatedFeelooAnalyticsRoute
   AuthenticatedFeelooAutomationRoute: typeof AuthenticatedFeelooAutomationRoute
@@ -4584,6 +4751,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCmlRouteRoute: typeof AuthenticatedCmlRouteRouteWithChildren
   AuthenticatedCrmRouteRoute: typeof AuthenticatedCrmRouteRouteWithChildren
   AuthenticatedDyapRouteRoute: typeof AuthenticatedDyapRouteRouteWithChildren
+  AuthenticatedEtudedemarcheRouteRoute: typeof AuthenticatedEtudedemarcheRouteRouteWithChildren
   AuthenticatedFeelooRouteRoute: typeof AuthenticatedFeelooRouteRouteWithChildren
   AuthenticatedNexusjobRouteRoute: typeof AuthenticatedNexusjobRouteRouteWithChildren
   AuthenticatedNojectRouteRoute: typeof AuthenticatedNojectRouteRouteWithChildren
@@ -4614,6 +4782,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCmlRouteRoute: AuthenticatedCmlRouteRouteWithChildren,
   AuthenticatedCrmRouteRoute: AuthenticatedCrmRouteRouteWithChildren,
   AuthenticatedDyapRouteRoute: AuthenticatedDyapRouteRouteWithChildren,
+  AuthenticatedEtudedemarcheRouteRoute:
+    AuthenticatedEtudedemarcheRouteRouteWithChildren,
   AuthenticatedFeelooRouteRoute: AuthenticatedFeelooRouteRouteWithChildren,
   AuthenticatedNexusjobRouteRoute: AuthenticatedNexusjobRouteRouteWithChildren,
   AuthenticatedNojectRouteRoute: AuthenticatedNojectRouteRouteWithChildren,
