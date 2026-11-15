@@ -1,9 +1,7 @@
 import type { Session, User } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
-import { supabase as baseSupabase } from "@/integrations/supabase/client";
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const supabase = baseSupabase as any;
+import { supabase } from "@/integrations/supabase/client";
 
 type AuthState = {
   user: User | null;

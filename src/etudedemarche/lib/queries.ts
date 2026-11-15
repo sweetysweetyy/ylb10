@@ -58,7 +58,7 @@ export function useStudy(id: string) {
       .on(
         "postgres_changes",
         { event: "UPDATE", schema: "public", table: "edm_studies", filter: `id=eq.${id}` },
-        (payload) => {
+        (payload: { new: unknown }) => {
           queryClient.setQueryData(["study", id], payload.new as unknown as StudyRow);
         },
       )
