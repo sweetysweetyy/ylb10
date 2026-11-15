@@ -23,6 +23,7 @@ import { Route as AuthenticatedCmlRouteRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedCrmRouteRouteImport } from './routes/_authenticated/crm/route'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDyapRouteRouteImport } from './routes/_authenticated/dyap/route'
+import { Route as AuthenticatedEtudedemarcheRouteRouteImport } from './routes/_authenticated/etudedemarche/route'
 import { Route as AuthenticatedFeelooRouteRouteImport } from './routes/_authenticated/feeloo/route'
 import { Route as AuthenticatedHistoryRouteImport } from './routes/_authenticated/history'
 import { Route as AuthenticatedIdeasRouteImport } from './routes/_authenticated/ideas'
@@ -293,6 +294,12 @@ const AuthenticatedDyapRouteRoute = AuthenticatedDyapRouteRouteImport.update({
   path: '/dyap',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedEtudedemarcheRouteRoute =
+  AuthenticatedEtudedemarcheRouteRouteImport.update({
+    id: '/etudedemarche',
+    path: '/etudedemarche',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedFeelooRouteRoute =
   AuthenticatedFeelooRouteRouteImport.update({
     id: '/feeloo',
@@ -653,21 +660,21 @@ const AuthenticatedDyapUpdateRoute = AuthenticatedDyapUpdateRouteImport.update({
 } as any)
 const AuthenticatedEtudedemarcheIndexRoute =
   AuthenticatedEtudedemarcheIndexRouteImport.update({
-    id: '/etudedemarche/',
-    path: '/etudedemarche/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedEtudedemarcheRouteRoute,
   } as any)
 const AuthenticatedEtudedemarcheMethodologiesRoute =
   AuthenticatedEtudedemarcheMethodologiesRouteImport.update({
-    id: '/etudedemarche/methodologies',
-    path: '/etudedemarche/methodologies',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/methodologies',
+    path: '/methodologies',
+    getParentRoute: () => AuthenticatedEtudedemarcheRouteRoute,
   } as any)
 const AuthenticatedEtudedemarcheSettingsRoute =
   AuthenticatedEtudedemarcheSettingsRouteImport.update({
-    id: '/etudedemarche/settings',
-    path: '/etudedemarche/settings',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedEtudedemarcheRouteRoute,
   } as any)
 const AuthenticatedFeelooIndexRoute =
   AuthenticatedFeelooIndexRouteImport.update({
@@ -1190,21 +1197,21 @@ const AuthenticatedCrmOpportunitiesIdRoute =
   } as any)
 const AuthenticatedEtudedemarcheStudiesIndexRoute =
   AuthenticatedEtudedemarcheStudiesIndexRouteImport.update({
-    id: '/etudedemarche/studies/',
-    path: '/etudedemarche/studies/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/studies/',
+    path: '/studies/',
+    getParentRoute: () => AuthenticatedEtudedemarcheRouteRoute,
   } as any)
 const AuthenticatedEtudedemarcheStudiesIdRoute =
   AuthenticatedEtudedemarcheStudiesIdRouteImport.update({
-    id: '/etudedemarche/studies/$id',
-    path: '/etudedemarche/studies/$id',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/studies/$id',
+    path: '/studies/$id',
+    getParentRoute: () => AuthenticatedEtudedemarcheRouteRoute,
   } as any)
 const AuthenticatedEtudedemarcheStudiesNewRoute =
   AuthenticatedEtudedemarcheStudiesNewRouteImport.update({
-    id: '/etudedemarche/studies/new',
-    path: '/etudedemarche/studies/new',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/studies/new',
+    path: '/studies/new',
+    getParentRoute: () => AuthenticatedEtudedemarcheRouteRoute,
   } as any)
 const AuthenticatedFeelooCandidatesIndexRoute =
   AuthenticatedFeelooCandidatesIndexRouteImport.update({
@@ -1440,6 +1447,7 @@ export interface FileRoutesByFullPath {
   '/cml': typeof AuthenticatedCmlRouteRouteWithChildren
   '/crm': typeof AuthenticatedCrmRouteRouteWithChildren
   '/dyap': typeof AuthenticatedDyapRouteRouteWithChildren
+  '/etudedemarche': typeof AuthenticatedEtudedemarcheRouteRouteWithChildren
   '/feeloo': typeof AuthenticatedFeelooRouteRouteWithChildren
   '/nexusjob': typeof AuthenticatedNexusjobRouteRouteWithChildren
   '/noject': typeof AuthenticatedNojectRouteRouteWithChildren
@@ -1852,6 +1860,7 @@ export interface FileRoutesById {
   '/_authenticated/cml': typeof AuthenticatedCmlRouteRouteWithChildren
   '/_authenticated/crm': typeof AuthenticatedCrmRouteRouteWithChildren
   '/_authenticated/dyap': typeof AuthenticatedDyapRouteRouteWithChildren
+  '/_authenticated/etudedemarche': typeof AuthenticatedEtudedemarcheRouteRouteWithChildren
   '/_authenticated/feeloo': typeof AuthenticatedFeelooRouteRouteWithChildren
   '/_authenticated/nexusjob': typeof AuthenticatedNexusjobRouteRouteWithChildren
   '/_authenticated/noject': typeof AuthenticatedNojectRouteRouteWithChildren
@@ -2069,6 +2078,7 @@ export interface FileRouteTypes {
     | '/cml'
     | '/crm'
     | '/dyap'
+    | '/etudedemarche'
     | '/feeloo'
     | '/nexusjob'
     | '/noject'
@@ -2480,6 +2490,7 @@ export interface FileRouteTypes {
     | '/_authenticated/cml'
     | '/_authenticated/crm'
     | '/_authenticated/dyap'
+    | '/_authenticated/etudedemarche'
     | '/_authenticated/feeloo'
     | '/_authenticated/nexusjob'
     | '/_authenticated/noject'
@@ -2824,6 +2835,13 @@ declare module '@tanstack/react-router' {
       path: '/dyap'
       fullPath: '/dyap'
       preLoaderRoute: typeof AuthenticatedDyapRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/etudedemarche': {
+      id: '/_authenticated/etudedemarche'
+      path: '/etudedemarche'
+      fullPath: '/etudedemarche'
+      preLoaderRoute: typeof AuthenticatedEtudedemarcheRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/feeloo': {
@@ -3290,24 +3308,24 @@ declare module '@tanstack/react-router' {
     }
     '/_authenticated/etudedemarche/': {
       id: '/_authenticated/etudedemarche/'
-      path: '/etudedemarche'
+      path: '/'
       fullPath: '/etudedemarche/'
       preLoaderRoute: typeof AuthenticatedEtudedemarcheIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedEtudedemarcheRouteRoute
     }
     '/_authenticated/etudedemarche/methodologies': {
       id: '/_authenticated/etudedemarche/methodologies'
-      path: '/etudedemarche/methodologies'
+      path: '/methodologies'
       fullPath: '/etudedemarche/methodologies'
       preLoaderRoute: typeof AuthenticatedEtudedemarcheMethodologiesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedEtudedemarcheRouteRoute
     }
     '/_authenticated/etudedemarche/settings': {
       id: '/_authenticated/etudedemarche/settings'
-      path: '/etudedemarche/settings'
+      path: '/settings'
       fullPath: '/etudedemarche/settings'
       preLoaderRoute: typeof AuthenticatedEtudedemarcheSettingsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedEtudedemarcheRouteRoute
     }
     '/_authenticated/feeloo/': {
       id: '/_authenticated/feeloo/'
@@ -3941,24 +3959,24 @@ declare module '@tanstack/react-router' {
     }
     '/_authenticated/etudedemarche/studies/': {
       id: '/_authenticated/etudedemarche/studies/'
-      path: '/etudedemarche/studies'
+      path: '/studies'
       fullPath: '/etudedemarche/studies/'
       preLoaderRoute: typeof AuthenticatedEtudedemarcheStudiesIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedEtudedemarcheRouteRoute
     }
     '/_authenticated/etudedemarche/studies/$id': {
       id: '/_authenticated/etudedemarche/studies/$id'
-      path: '/etudedemarche/studies/$id'
+      path: '/studies/$id'
       fullPath: '/etudedemarche/studies/$id'
       preLoaderRoute: typeof AuthenticatedEtudedemarcheStudiesIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedEtudedemarcheRouteRoute
     }
     '/_authenticated/etudedemarche/studies/new': {
       id: '/_authenticated/etudedemarche/studies/new'
-      path: '/etudedemarche/studies/new'
+      path: '/studies/new'
       fullPath: '/etudedemarche/studies/new'
       preLoaderRoute: typeof AuthenticatedEtudedemarcheStudiesNewRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedEtudedemarcheRouteRoute
     }
     '/_authenticated/feeloo/candidates/': {
       id: '/_authenticated/feeloo/candidates/'
@@ -4344,6 +4362,35 @@ const AuthenticatedDyapRouteRouteWithChildren =
     AuthenticatedDyapRouteRouteChildren,
   )
 
+interface AuthenticatedEtudedemarcheRouteRouteChildren {
+  AuthenticatedEtudedemarcheMethodologiesRoute: typeof AuthenticatedEtudedemarcheMethodologiesRoute
+  AuthenticatedEtudedemarcheSettingsRoute: typeof AuthenticatedEtudedemarcheSettingsRoute
+  AuthenticatedEtudedemarcheIndexRoute: typeof AuthenticatedEtudedemarcheIndexRoute
+  AuthenticatedEtudedemarcheStudiesIdRoute: typeof AuthenticatedEtudedemarcheStudiesIdRoute
+  AuthenticatedEtudedemarcheStudiesNewRoute: typeof AuthenticatedEtudedemarcheStudiesNewRoute
+  AuthenticatedEtudedemarcheStudiesIndexRoute: typeof AuthenticatedEtudedemarcheStudiesIndexRoute
+}
+
+const AuthenticatedEtudedemarcheRouteRouteChildren: AuthenticatedEtudedemarcheRouteRouteChildren =
+  {
+    AuthenticatedEtudedemarcheMethodologiesRoute:
+      AuthenticatedEtudedemarcheMethodologiesRoute,
+    AuthenticatedEtudedemarcheSettingsRoute:
+      AuthenticatedEtudedemarcheSettingsRoute,
+    AuthenticatedEtudedemarcheIndexRoute: AuthenticatedEtudedemarcheIndexRoute,
+    AuthenticatedEtudedemarcheStudiesIdRoute:
+      AuthenticatedEtudedemarcheStudiesIdRoute,
+    AuthenticatedEtudedemarcheStudiesNewRoute:
+      AuthenticatedEtudedemarcheStudiesNewRoute,
+    AuthenticatedEtudedemarcheStudiesIndexRoute:
+      AuthenticatedEtudedemarcheStudiesIndexRoute,
+  }
+
+const AuthenticatedEtudedemarcheRouteRouteWithChildren =
+  AuthenticatedEtudedemarcheRouteRoute._addFileChildren(
+    AuthenticatedEtudedemarcheRouteRouteChildren,
+  )
+
 interface AuthenticatedFeelooRouteRouteChildren {
   AuthenticatedFeelooAnalyticsRoute: typeof AuthenticatedFeelooAnalyticsRoute
   AuthenticatedFeelooAutomationRoute: typeof AuthenticatedFeelooAutomationRoute
@@ -4704,6 +4751,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCmlRouteRoute: typeof AuthenticatedCmlRouteRouteWithChildren
   AuthenticatedCrmRouteRoute: typeof AuthenticatedCrmRouteRouteWithChildren
   AuthenticatedDyapRouteRoute: typeof AuthenticatedDyapRouteRouteWithChildren
+  AuthenticatedEtudedemarcheRouteRoute: typeof AuthenticatedEtudedemarcheRouteRouteWithChildren
   AuthenticatedFeelooRouteRoute: typeof AuthenticatedFeelooRouteRouteWithChildren
   AuthenticatedNexusjobRouteRoute: typeof AuthenticatedNexusjobRouteRouteWithChildren
   AuthenticatedNojectRouteRoute: typeof AuthenticatedNojectRouteRouteWithChildren
@@ -4723,15 +4771,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSkytaskRoute: typeof AuthenticatedSkytaskRoute
   AuthenticatedSkyventeRoute: typeof AuthenticatedSkyventeRouteWithChildren
   AuthenticatedSmartteamsRoute: typeof AuthenticatedSmartteamsRoute
-  AuthenticatedEtudedemarcheMethodologiesRoute: typeof AuthenticatedEtudedemarcheMethodologiesRoute
-  AuthenticatedEtudedemarcheSettingsRoute: typeof AuthenticatedEtudedemarcheSettingsRoute
   AuthenticatedSendySettingsRoute: typeof AuthenticatedSendySettingsRoute
   AuthenticatedSkyCloudRoute: typeof AuthenticatedSkyCloudRoute
-  AuthenticatedEtudedemarcheIndexRoute: typeof AuthenticatedEtudedemarcheIndexRoute
   AuthenticatedSendyIndexRoute: typeof AuthenticatedSendyIndexRoute
-  AuthenticatedEtudedemarcheStudiesIdRoute: typeof AuthenticatedEtudedemarcheStudiesIdRoute
-  AuthenticatedEtudedemarcheStudiesNewRoute: typeof AuthenticatedEtudedemarcheStudiesNewRoute
-  AuthenticatedEtudedemarcheStudiesIndexRoute: typeof AuthenticatedEtudedemarcheStudiesIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -4740,6 +4782,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCmlRouteRoute: AuthenticatedCmlRouteRouteWithChildren,
   AuthenticatedCrmRouteRoute: AuthenticatedCrmRouteRouteWithChildren,
   AuthenticatedDyapRouteRoute: AuthenticatedDyapRouteRouteWithChildren,
+  AuthenticatedEtudedemarcheRouteRoute:
+    AuthenticatedEtudedemarcheRouteRouteWithChildren,
   AuthenticatedFeelooRouteRoute: AuthenticatedFeelooRouteRouteWithChildren,
   AuthenticatedNexusjobRouteRoute: AuthenticatedNexusjobRouteRouteWithChildren,
   AuthenticatedNojectRouteRoute: AuthenticatedNojectRouteRouteWithChildren,
@@ -4761,20 +4805,9 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSkytaskRoute: AuthenticatedSkytaskRoute,
   AuthenticatedSkyventeRoute: AuthenticatedSkyventeRouteWithChildren,
   AuthenticatedSmartteamsRoute: AuthenticatedSmartteamsRoute,
-  AuthenticatedEtudedemarcheMethodologiesRoute:
-    AuthenticatedEtudedemarcheMethodologiesRoute,
-  AuthenticatedEtudedemarcheSettingsRoute:
-    AuthenticatedEtudedemarcheSettingsRoute,
   AuthenticatedSendySettingsRoute: AuthenticatedSendySettingsRoute,
   AuthenticatedSkyCloudRoute: AuthenticatedSkyCloudRoute,
-  AuthenticatedEtudedemarcheIndexRoute: AuthenticatedEtudedemarcheIndexRoute,
   AuthenticatedSendyIndexRoute: AuthenticatedSendyIndexRoute,
-  AuthenticatedEtudedemarcheStudiesIdRoute:
-    AuthenticatedEtudedemarcheStudiesIdRoute,
-  AuthenticatedEtudedemarcheStudiesNewRoute:
-    AuthenticatedEtudedemarcheStudiesNewRoute,
-  AuthenticatedEtudedemarcheStudiesIndexRoute:
-    AuthenticatedEtudedemarcheStudiesIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
