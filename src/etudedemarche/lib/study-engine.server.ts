@@ -32,7 +32,7 @@ async function loadContext(supabase: Client, userId: string) {
     .join("\n\n");
 
   return {
-    model: settings?.model ?? "google/gemini-3.6-flash",
+    model: await (await import("@/lib/ai-models.server")).resolveAppAiModel(supabase, userId, "etudedemarche"),
     depth: settings?.depth ?? "standard",
     language: settings?.language ?? "fr",
     rules,

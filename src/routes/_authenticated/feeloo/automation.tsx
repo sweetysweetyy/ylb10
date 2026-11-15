@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
@@ -69,6 +69,9 @@ function AutomationPage() {
       sheets_range: s.sheets_range || "A:Z",
       auto_sync: s.auto_sync !== false,
       auto_match: s.auto_match !== false,
+      email_provider: emailProv,
+      spreadsheet_provider: sheetProv,
+      skytab_sheet_id: s.skytab_sheet_id || null,
       ...extra,
     };
     await save({ data: payload });
@@ -88,6 +91,17 @@ function AutomationPage() {
 
   const runs: any[] = state?.runs ?? [];
   const connected = !!state?.google;
+  const emailProv: "sendy" | "gmail" = s.email_provider ?? "sendy";
+  const sheetProv: "skytab" | "google_sheets" = s.spreadsheet_provider ?? "skytab";
+  const sheets: { id: string; name: string }[] = state?.skytabSheets ?? [];
+  const Tabs = ({ value, opts, onPick }: { value: string; opts: [string, string][]; onPick: (v: string) => void }) => (
+    <div className="mb-3 inline-flex rounded-xl border border-border bg-white/40 p-1 gap-1">
+      {opts.map(([v, l]) => (
+        <button key={v} type="button" onClick={() => onPick(v)}
+          className={`rounded-lg px-3 py-1 text-xs font-medium ${value === v ? "bg-white shadow-sm" : "text-muted-foreground"}`}>{l}</button>
+      ))}
+    </div>
+  );
 
   return (
     <div className="space-y-4">
@@ -117,6 +131,10 @@ function AutomationPage() {
               <div className="text-xs text-muted-foreground">Dernière exécution : {fmt(s.gmail_last_run_at)}</div></div>
             <Switch className="ml-auto" checked={s.gmail_cron_enabled !== false} onCheckedChange={(v) => patch("gmail_cron_enabled", v)} />
           </div>
+          <Tabs value={emailProv} opts={[["sendy", "Sendy (Interne)"], ["gmail", "Gmail (Google OAuth)"]]} onPick={(v) => patch("email_provider", v)} />
+          {emailProv === "sendy"
+            ? <div className="mb-3 inline-flex items-center gap-1 rounded-full bg-emerald-500/15 px-3 py-1 text-xs text-emerald-700"><CheckCircle2 className="size-3" />Connecté à la boîte Sendy</div>
+            : <p className="mb-3 text-xs text-muted-foreground">{connected ? `Compte Google : ${state.google.email ?? "lié"}` : "Connecte ton compte Google dans Intégrations (OAuth) pour lire les CV reçus sur Gmail."}</p>}
           <div className="grid sm:grid-cols-2 gap-3">
             <div><Label className="text-xs">Fréquence (minutes)</Label>
               <Input type="number" min={1} className="bg-white/60" value={s.gmail_interval_minutes ?? 15} onChange={(e) => patch("gmail_interval_minutes", e.target.value)} /></div>
@@ -124,9 +142,9 @@ function AutomationPage() {
               <Input type="number" min={1} max={50} className="bg-white/60" value={s.gmail_max_per_run ?? 10} onChange={(e) => patch("gmail_max_per_run", e.target.value)} /></div>
             <div className="sm:col-span-2"><Label className="text-xs">Mots-clés détectés (séparés par des virgules)</Label>
               <Input className="bg-white/60" value={s.gmail_keywords ?? "cv"} onChange={(e) => patch("gmail_keywords", e.target.value)} /></div>
-            <div className="sm:col-span-2"><Label className="text-xs">Requête Gmail avancée (optionnel, prioritaire)</Label>
+            {emailProv === "gmail" && <div className="sm:col-span-2"><Label className="text-xs">Requête Gmail avancée (optionnel, prioritaire)</Label>
               <Input className="bg-white/60" placeholder='ex: ("cv" OR "candidature") has:attachment newer_than:14d'
-                value={s.gmail_search_query ?? ""} onChange={(e) => patch("gmail_search_query", e.target.value)} /></div>
+                value={s.gmail_search_query ?? ""} onChange={(e) => patch("gmail_search_query", e.target.value)} /></div>}
             <div className="sm:col-span-2 flex items-center justify-between rounded-xl bg-white/40 px-3 py-2">
               <Label className="text-xs">Exiger une pièce jointe</Label>
               <Switch checked={!!s.gmail_require_attachment} onCheckedChange={(v) => patch("gmail_require_attachment", v)} />
@@ -134,7 +152,7 @@ function AutomationPage() {
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
             <Button onClick={() => persist()}>Enregistrer</Button>
-            <Button variant="outline" disabled={busy === "gmail" || !connected} onClick={() => trigger("gmail")}>
+            <Button variant="outline" disabled={busy === "gmail" || (emailProv === "gmail" && !connected)} onClick={() => trigger("gmail")}>
               <RefreshCw className={`size-4 mr-1 ${busy === "gmail" ? "animate-spin" : ""}`} />Lancer maintenant
             </Button>
             <Button variant="ghost" onClick={async () => { await clearMem({ data: { kind: "gmail" } }); toast.success("Mémoire Gmail réinitialisée"); load(); }}>
@@ -147,15 +165,24 @@ function AutomationPage() {
         <BentoCard>
           <div className="flex items-center gap-2 mb-3">
             <div className="size-9 rounded-xl holo-bg grid place-items-center text-white"><Sheet className="size-4" /></div>
-            <div className="min-w-0"><div className="font-medium">Cron Google Sheets — nouveaux postes</div>
+            <div className="min-w-0"><div className="font-medium">Cron postes / offres</div>
               <div className="text-xs text-muted-foreground">Dernière exécution : {fmt(s.sheets_last_run_at)}</div></div>
             <Switch className="ml-auto" checked={s.sheets_cron_enabled !== false} onCheckedChange={(v) => patch("sheets_cron_enabled", v)} />
           </div>
+          <Tabs value={sheetProv} opts={[["skytab", "Sky Tab (Interne)"], ["google_sheets", "Google Sheets (Google OAuth)"]]} onPick={(v) => patch("spreadsheet_provider", v)} />
           <div className="grid sm:grid-cols-2 gap-3">
+            {sheetProv === "skytab" ? <div className="sm:col-span-2"><Label className="text-xs">Classeur Sky Tab</Label>
+              {sheets.length === 0
+                ? <p className="text-xs text-muted-foreground mt-1">Aucun classeur pour l'instant. <Link to="/skytab" className="underline">Créer un classeur dans Sky Tab</Link></p>
+                : <select className="mt-1 w-full rounded-md border border-border bg-white/60 px-3 py-2 text-sm" value={s.skytab_sheet_id ?? ""} onChange={(e) => patch("skytab_sheet_id", e.target.value || null)}>
+                    <option value="">— Choisir un classeur —</option>
+                    {sheets.map((x) => <option key={x.id} value={x.id}>{x.name}</option>)}
+                  </select>}
+            </div> : <>
             <div className="sm:col-span-2"><Label className="text-xs">ID du Google Sheet</Label>
               <Input className="bg-white/60" value={s.sheets_spreadsheet_id ?? ""} onChange={(e) => patch("sheets_spreadsheet_id", e.target.value)} placeholder="1BxiMVs0XRA5nFMdKvBd…" /></div>
             <div><Label className="text-xs">Plage</Label>
-              <Input className="bg-white/60" value={s.sheets_range ?? "A:Z"} onChange={(e) => patch("sheets_range", e.target.value)} /></div>
+              <Input className="bg-white/60" value={s.sheets_range ?? "A:Z"} onChange={(e) => patch("sheets_range", e.target.value)} /></div></>}
             <div><Label className="text-xs">Fréquence (minutes)</Label>
               <Input type="number" min={1} className="bg-white/60" value={s.sheets_interval_minutes ?? 15} onChange={(e) => patch("sheets_interval_minutes", e.target.value)} /></div>
             <div className="sm:col-span-2"><Label className="text-xs">Max de lignes / exécution</Label>
@@ -163,7 +190,7 @@ function AutomationPage() {
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
             <Button onClick={() => persist()}>Enregistrer</Button>
-            <Button variant="outline" disabled={busy === "sheets" || !connected} onClick={() => trigger("sheets")}>
+            <Button variant="outline" disabled={busy === "sheets" || (sheetProv === "google_sheets" && !connected)} onClick={() => trigger("sheets")}>
               <RefreshCw className={`size-4 mr-1 ${busy === "sheets" ? "animate-spin" : ""}`} />Lancer maintenant
             </Button>
             <Button variant="ghost" onClick={async () => { await clearMem({ data: { kind: "sheets" } }); toast.success("Mémoire Sheets réinitialisée"); load(); }}>
