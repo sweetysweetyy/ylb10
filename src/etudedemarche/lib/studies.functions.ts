@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
@@ -10,7 +11,8 @@ export const createStudy = createServerFn({ method: "POST" })
     z.object({ brief: z.string().min(20).max(6000), model: z.string().optional() }).parse(input),
   )
   .handler(async ({ data, context }) => {
-    const { supabase, userId } = context;
+    const { userId } = context;
+    const supabase = context.supabase as any;
     const { data: settings } = await supabase
       .from("edm_settings")
       .select("model")
@@ -53,15 +55,15 @@ export const createStudy = createServerFn({ method: "POST" })
 export const launchStudy = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => z.object({ studyId: z.string().uuid() }).parse(input))
-  .handler(async ({ data, context }) => runStudy(context.supabase, context.userId, data.studyId));
+  .handler(async ({ data, context }) => runStudy((context.supabase as any), context.userId, data.studyId));
 
 export const regenerateStudy = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => z.object({ studyId: z.string().uuid() }).parse(input))
   .handler(async ({ data, context }) => {
-    await context.supabase
+    await (context.supabase as any)
       .from("edm_studies")
       .update({ status: "researching", progress: 0, report: null, error: null, logs: [] })
       .eq("id", data.studyId);
-    return runStudy(context.supabase, context.userId, data.studyId);
+    return runStudy((context.supabase as any), context.userId, data.studyId);
   });
