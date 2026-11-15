@@ -28,6 +28,7 @@ export const SKY_APPS: SkyApp[] = [
   { id: "businessplan", name: "BUSINESS PLAN", desc: "Dossiers de financement", to: "/businessplan", icon: Presentation, color: "#f59e0b" },
   { id: "cml", name: "HOLO CM", desc: "LinkedIn IA", to: "/cml/dashboard", icon: Linkedin, color: "#5DF8D8" },
   { id: "nexusjob", name: "NEXUSJOB", desc: "Emploi IA", to: "/nexusjob/dashboard", icon: BriefcaseBusiness, color: "#FFB116" },
+  { id: "etudedemarche", name: "ÉTUDE MARCHÉ", desc: "Études de marché IA", to: "/etudedemarche", icon: FileText, color: "#06b6d4" },
   { id: "feeloo", name: "FEELOO", desc: "Cockpit RH IA", to: "/feeloo", icon: Users, color: "#FE017C" },
 ];
 

@@ -18,7 +18,8 @@ export const createStudy = createServerFn({ method: "POST" })
       .select("model")
       .eq("user_id", userId)
       .maybeSingle();
-    const model = data.model ?? settings?.model ?? "google/gemini-3.6-flash";
+    void settings;
+    const model = data.model ?? (await (await import("@/lib/ai-models.server")).resolveAppAiModel(supabase, userId, "etudedemarche"));
 
     const { data: created, error } = await supabase
       .from("edm_studies")

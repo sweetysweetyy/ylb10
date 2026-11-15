@@ -25,6 +25,7 @@ export const AI_APPS = [
   { key: "businessplan", name: "Business Plan", hint: "Analyse et reconstruction de business plans PDF" },
   { key: "nexusjob", name: "NexusJob", hint: "Analyse de CV & matching d’offres" },
   { key: "feeloo", name: "Feeloo", hint: "Analyse de CV, fiches de poste & matching RH" },
+  { key: "etudedemarche", name: "Étude de marché", hint: "Rédaction d’études de marché" },
 ] as const;
 
 export type AiAppKey = (typeof AI_APPS)[number]["key"];
@@ -48,6 +49,7 @@ export const RECOMMENDED: Record<AiAppKey, string> = {
   businessplan: "openai/gpt-6-astra",
   nexusjob: "openai/gpt-6-luna",
   feeloo: "openai/gpt-6-luna",
+  etudedemarche: "openai/gpt-6-sol",
 };
 
 export function isCentralModel(id: unknown): id is string {

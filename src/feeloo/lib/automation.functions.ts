@@ -6,10 +6,11 @@ export const getAutomationStateFn = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     const { supabase, userId } = context;
-    const [{ data: settings }, { data: runs }, { data: google }] = await Promise.all([
+    const [{ data: settings }, { data: runs }, { data: google }, { data: skytabSheets }] = await Promise.all([
       supabase.from("fl_settings").select("*").eq("user_id", userId).maybeSingle(),
       supabase.from("fl_cron_runs").select("*").eq("user_id", userId).order("started_at", { ascending: false }).limit(30),
       supabase.from("fl_google_connections").select("email, updated_at").eq("user_id", userId).maybeSingle(),
+      (supabase as any).from("skytab_sheets").select("id, name, updated_at").eq("user_id", userId).order("updated_at", { ascending: false }),
     ]);
     const [{ count: emails }, { count: rows }] = await Promise.all([
       supabase.from("fl_processed_emails").select("message_id", { count: "exact", head: true }).eq("user_id", userId),
@@ -19,6 +20,7 @@ export const getAutomationStateFn = createServerFn({ method: "GET" })
       settings: settings ?? null,
       runs: runs ?? [],
       google: google ?? null,
+      skytabSheets: (skytabSheets ?? []) as { id: string; name: string; updated_at: string }[],
       memory: { emails: emails ?? 0, rows: rows ?? 0 },
     };
   });
